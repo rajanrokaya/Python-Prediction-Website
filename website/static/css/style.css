@@ -1,0 +1,31 @@
+body {
+    font-family: 'Work Sans', 'Calibri', sans-serif;
+    margin: 0;
+    width: 100%;
+}
+
+.main-nav {
+    background: #191980;
+    z-index: 1;
+    padding: 5px;
+}
+
+.main-nav a {
+    color: #ccc;
+    font-size: 2rem;
+}
+
+.main-nav a:hover,
+.main-nav a:active {
+    color: white;
+    font-weight: bolder;
+}
+
+.navbar-brand__logo{
+    width: 60px;
+}
+
+.navbar-toggler:focus{
+    box-shadow: none;
+    border: 2px solid white;
+}

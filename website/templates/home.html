@@ -1,0 +1,35 @@
+<!--
+It looks like this template is a homepage for a web application. The template includes a form with a single input
+field for a year and a submit button labeled "Predict." When the form is submitted, the application uses the year
+provided in the input field to make predictions for both import and export trade and displays the predicted values
+and their corresponding accuracy. The template also includes conditionals to check if predictions were made before
+displaying the results. Overall, it seems like this template is used to display a form for making trade predictions
+based on a year input.
+-->
+
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+<div class="container mt-4">
+    <form class="form-inline" action="/" method="POST">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Year to be predicated </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control form-control-sm" name="year" placeholder="YEAR"
+                patten="[0-9]">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2" id="predict-button">Predict</button>
+        </div>
+
+        {%if predict_import%}
+        <p>The predicated import for the given year is {{predict_import}} with {{accuracy_import}}% Accuracy. </p>
+        {%endif%}
+
+        {%if predict_export%}
+        <p>The predicated export for the given year is {{predict_export}} with {{accuracy_export}}% Accuracy. </p>
+        {%endif%}
+    </form>
+</div>
+{% endblock %}

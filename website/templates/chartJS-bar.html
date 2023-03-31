@@ -1,0 +1,94 @@
+<!--This Jinja template extends a base template named "base.html" and overrides the title block to set the title of
+the page to "Bar Chart JS".
+
+In the content block, it creates a container that contains a title and a canvas element to render the bar chart.
+It then uses JavaScript and the Chart.js library to create the chart and render it on the canvas element. The chart
+uses data passed in from the template, in the form of a variable named "data", which is a list of lists containing the
+labels, export data, and import data for the chart.
+
+It sets the type of chart to "bar" and sets the data for the chart as well as the options for the chart like responsive,
+maintainAspectRatio, hover and legend. It also sets the scales for the x and y axis and display the labels.-->
+
+{% extends "base.html" %}
+{% block title %}Bar Chart JS{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Foreign Trade</h1>
+    <canvas id="bar-chart" width="850" height="500"></canvas>
+</div>
+<script>
+    // Get the data from the template
+    var data = {{ data | safe }};
+
+
+    // Extract the labels and data from the data
+    var labels = data.map(function (item) {
+        return item[0];
+    });
+    var exports = data.map(function (item) {
+        return item[1];
+    });
+    var imports = data.map(function (item) {
+        return item[2];
+    });
+
+    // Create the chart
+    var ctx = document.getElementById('bar-chart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Exports',
+                    data: exports,
+                    backgroundColor: '#069AF3'
+                },
+                {
+                    label: 'Imports',
+                    data: imports,
+                    backgroundColor: '#FE420F'
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            hover: {
+                mode: 'index',
+                intersect: false
+            },
+            legend: {
+                display: true,
+                position: 'top'
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Year',
+                        },
+                        ticks: {
+                            display: true,
+                            label: 'Year'
+                        }
+                    }
+                ],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'EURO in Million',
+                        },
+                        ticks: {
+                            display: true,
+                            label: 'EURO in Million'
+                        }
+                    }
+                ]
+            }
+        },
+    });
+</script>
+{% endblock %}

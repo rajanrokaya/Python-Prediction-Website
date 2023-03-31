@@ -1,0 +1,32 @@
+<!--The above code is a template written in Jinja2, a templating engine for the Python programming language, and HTML.
+It defines a webpage that displays a table of data with columns for "Year", "Exports", and "Imports". The table data is
+passed to the template through a variable called "data" and looped through with a for loop to display each row of data.
+The template extends a base template called "base.html" which defines the overall structure and style of the webpage.
+The title of the webpage is set to "Datas" and the main content of the webpage is the table displaying the data.
+-->
+
+{% extends "base.html" %}
+{% block title %}Datas{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Foreign Trade</h1>
+    <table class="table table-striped table-bordered">
+        <thead class="font-monospace h4">
+        <tr class="text-center ">
+            <th>Year</th>
+            <th>Exports</th>
+            <th>Imports</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in data %}
+        <tr class="text-center">
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

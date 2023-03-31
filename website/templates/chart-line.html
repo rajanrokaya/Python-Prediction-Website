@@ -1,0 +1,69 @@
+<!--This Jinja template extends a base template named "base.html" and overrides the title block to set the title of
+the page to "Line Chart".
+
+In the content block, it creates a container that contains a title, an image of a line chart, and two buttons labeled
+"Import" and "Export". When the user hovers over the import button, the line chart image changes to show the import
+data and when the user hovers over the export button, the line chart image changes to show the export data.
+
+It also includes a script that uses javascript to get the import and export buttons, line chart image, and when the
+import and export button is hovered over it changes the images to the corresponding import and export images and when
+the button is not hovered anymore it changes the image back to the export-import chart.-->
+
+{% extends "base.html" %}
+{% block title %}Line Chart{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <div>
+        <h1 class="text-center mb-4 mx-auto">Foreign Trade Line Chart</h1>
+    </div>
+    <div class="text-center">
+        <a href="chartJS-line">
+            <img id="line-chart" src="{{ url_for('static', filename='images/line-export-import-chart.png') }}"
+                 alt="Line Chart"
+                 class="mx-auto d-block w-auto h-auto">
+        </a>
+    </div>
+    <br>
+    <br>
+    <div class="text-center">
+        <button class="btn btn-primary btn-lg active" role="button" aria-pressed="true" id="import-button">
+            Import
+        </button>
+        <button class="btn btn-primary btn-lg active" role="button" aria-pressed="true" id="export-button">
+            Export
+        </button>
+    </div>
+</div>
+
+
+<script>
+    // Get the import and export buttons
+    var importButton = document.getElementById('import-button');
+    var exportButton = document.getElementById('export-button');
+
+    // Get the line chart image
+    var lineChart = document.getElementById('line-chart');
+
+    // When the import button is hovered over, change the image to the import chart
+    importButton.onmouseover = function () {
+        lineChart.src = "{{ url_for('static', filename='images/line-import-chart.png') }}";
+    }
+
+    // When the import button is not hovered anymore, change the image back to the export-import chart
+    importButton.onmouseout = function () {
+        lineChart.src = "{{ url_for('static', filename='images/line-export-import-chart.png') }}";
+    }
+
+    // When the export button is hovered over, change the image to the export chart
+    exportButton.onmouseover = function () {
+        lineChart.src = "{{ url_for('static', filename='images/line-export-chart.png') }}";
+    }
+
+    // When the export button is not hovered anymore, change the image back to the export-import chart
+    exportButton.onmouseout = function () {
+        lineChart.src = "{{ url_for('static', filename='images/line-export-import-chart.png') }}";
+    }
+</script>
+
+
+{% endblock %}
